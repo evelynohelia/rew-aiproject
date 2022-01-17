@@ -72,15 +72,61 @@ def multi_unet_model(n_classes=4, IMG_HEIGHT=256, IMG_WIDTH=256, IMG_CHANNELS=1)
     model = Model(inputs=[inputs], outputs=[outputs])
     
     return model
-
+# 
 def get_model():
     return multi_unet_model(n_classes=n_classes, IMG_HEIGHT=256, IMG_WIDTH=256, IMG_CHANNELS=1)
 
-model = get_model()
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-model.summary()
-model.load_weights('testmodel2.h5')
-print(model)
+def run_model():
+    model = get_model()
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    model.summary()
+    model.load_weights('testmodel2.h5')
+    return model
+
+
+def get_mask(image,model,filename="prediccion.png",mode='camisa'):
+    color_list = list(range(59))
+    print(color_list)
+    test_img_input=np.expand_dims(image, 0)
+    prediction = (model.predict(test_img_input))
+    predicted_img=np.argmax(prediction, axis=3)[0,:,:]
+    def camisa(imgshow):
+        new_image = imgshow
+        for i in np.unique(new_image):
+            if i > 18:
+                new_image[np.where(new_image==i)] = 0
+            else: 
+                if i > 0:
+                    new_image[np.where(new_image==i)] = 10
+        return new_image
+
+
+    def pantalon(imgshow):
+        new_image = imgshow
+        for i in np.unique(new_image):
+            if i < 24 or i > 35:
+                new_image[np.where(new_image==i)] = 0
+            else:
+                if i > 0:
+                    new_image[np.where(new_image==i)] = 10
+
+        return new_image
+
+    def piel(imgshow):
+        new_image = imgshow
+        for i in np.unique(new_image):
+            if i < 35:
+                new_image[np.where(new_image==i)] = 0
+            else:
+                if i > 0:
+                    new_image[np.where(new_image==i)] = 10
+        return new_image
+    plt.figure(figsize=(256, 256))
+    fig = plt.imshow(camisa(predicted_img),cmap='gray')
+    plt.axis('off')
+    plt.savefig(filename, bbox_inches='tight')
+    plt.close()
+
 
 '''
 test_images = []
