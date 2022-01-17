@@ -56,6 +56,8 @@ def imageTest(request):
            store_pantalon = stores[index_pantalon]
 
            return JsonResponse({'message':'imagen recibida', 'recibido': file_name, 
+           'blusa': 'img/results/blusa.jpeg',
+           'pantalon': 'img/results/pantalon.jpeg',
            'result_pre_camisa': result_pre_camisa,
            'result_pre_pantalon': result_pre_pantalon,
            'y_result_camisa': y_result_camisa.tolist(),
@@ -67,3 +69,12 @@ def imageTest(request):
         else:
             print(form.errors)    
 
+@csrf_exempt
+def download(request, path):
+    print('dowload',path)
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/form-data")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response

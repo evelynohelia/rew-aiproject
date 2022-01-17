@@ -5,6 +5,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import os
 from PIL import Image
+from django.conf import settings
 
 SIZE_X = 256 
 SIZE_Y = 256
@@ -134,14 +135,17 @@ def get_mask(image,model,filename="prediccion.png",mode='camisa'):
 
     fig = plt.imshow(predicted_img,cmap='jet')
     plt.axis('off')
-    plt.savefig(os.path.join(os.getcwd(),'assets/img/results/')+filename+'.jpeg', bbox_inches='tight')
+    pathFileName = os.path.join(settings.STATICFILES_DIRS[0], "img\\results\\" + filename + '.jpeg')
+    plt.savefig(pathFileName, bbox_inches='tight')
 
     fig_gray = plt.imshow(predicted_img,cmap='gray')
     plt.axis('off')
-    plt.savefig(os.path.join(os.getcwd(),'assets/img/results/')+filename+'_mask.jpeg', bbox_inches='tight')
+    pathFileNameMask = os.path.join(settings.STATICFILES_DIRS[0], "img\\results\\" + filename + '_mask.jpeg')
+
+    plt.savefig(pathFileNameMask, bbox_inches='tight')
     plt.close()
 
-    return filename
+    return pathFileName
     '''
     fig = plt.imshow(camisa(predicted_img),cmap='gray')
     plt.axis('off')
