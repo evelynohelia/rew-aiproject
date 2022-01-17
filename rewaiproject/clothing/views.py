@@ -9,6 +9,7 @@ from django.core.files.storage import default_storage
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.decorators.csrf import csrf_exempt
+import utils.storeClassification as classification
 
 def index(request):
     return render(
@@ -30,14 +31,16 @@ def imageTest(request):
            file_name = default_storage.save(source_folder+file.name, file)
            img = cv2.imread(file_name, 0)       
            img = cv2.resize(img, (256, 256))
-           #model = run_model()
-           
-           #result_camisa = classification.get_mask(img,model, file.name+'test',mode='camisa')
-           #result_pantalon = classification.get_mask(img,model, file.name+'test',mode='pantalon')
+           model = classification.run_model()
+           file_name_ext = file.name.split('.')
+           file_base_name = file_name_ext[0]
+           result_camisa = classification.get_mask(img,model, 'blusa.jpeg',mode='camisa')
+           result_pantalon = classification.get_mask(img,model, 'pantalon.jpeg',mode='pantalon')
+          
            # metodo para obtener la nueva imagen
            # file_output_name
-           return JsonResponse({'message':'imagen recibida', 'recibido': file_name, 'result_camisa': 'y',
-           'result_pantalon': 'y'})
+           return JsonResponse({'message':'imagen recibida', 'recibido': file_name, 'result_camisa': result_camisa,
+           'result_pantalon': result_pantalon})
         else:
             print(form.errors)    
 

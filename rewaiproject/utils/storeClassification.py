@@ -3,6 +3,8 @@ from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, concatenate, Co
 from tensorflow.keras.utils import normalize
 import numpy as np
 from matplotlib import pyplot as plt
+import os
+from PIL import Image
 
 SIZE_X = 256 
 SIZE_Y = 256
@@ -74,7 +76,7 @@ def run_model():
     model = get_model()
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     model.summary()
-    model.load_weights('testmodel2.h5')
+    model.load_weights(os.path.join(os.getcwd(),'utils/testmodel2.h5'))
     return model
 
 
@@ -116,7 +118,8 @@ def get_mask(image,model,filename="prediccion.png",mode='camisa'):
                 if i > 0:
                     new_image[np.where(new_image==i)] = 10
         return new_image
-    plt.figure(figsize=(256, 256))
+    
+    #plt.figure(figsize=(256, 256))
     if mode == 'camisa':
         predicted_img = camisa(predicted_img)
     elif mode == 'pantalon':
@@ -125,7 +128,19 @@ def get_mask(image,model,filename="prediccion.png",mode='camisa'):
         predicted_img = piel(predicted_img)
     else:
         predicted_img = predicted_img
-    #fig = plt.imshow(camisa(predicted_img),cmap='gray')
+    #im = Image.fromarray((predicted_img * 255).astype(np.uint8))
+    #im.save(filename)
+    #print(im)
+    fig = plt.imshow(camisa(predicted_img),cmap='jet')
     plt.axis('off')
     plt.savefig(filename, bbox_inches='tight')
     plt.close()
+    
+    return filename
+    '''
+    fig = plt.imshow(camisa(predicted_img),cmap='gray')
+    plt.axis('off')
+    plt.savefig(filename, bbox_inches='tight')
+    plt.close()
+    '''
+print (os.path.join(os.getcwd(), "utils/" ))
