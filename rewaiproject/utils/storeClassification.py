@@ -122,6 +122,14 @@ def get_mask(image,model,filename="prediccion.png",mode='camisa'):
                     new_image[np.where(new_image==i)] = 10
         return new_image
     plt.figure(figsize=(256, 256))
+    if mode == 'camisa':
+        predicted_img = camisa(predicted_img)
+    elif mode == 'pantalon':
+        predicted_img = pantalon(predicted_img)
+    elif mode == 'piel':
+        predicted_img = piel(predicted_img)
+    else:
+        predicted_img = predicted_img
     fig = plt.imshow(camisa(predicted_img),cmap='gray')
     plt.axis('off')
     plt.savefig(filename, bbox_inches='tight')
