@@ -14,6 +14,7 @@
                         <div class="input-group">
                         <span class="form-control"></span>
                         <span class="input-group-btn">
+                            {{ form.as_p }}
                             <input name="uploaded_file" id="inputImageBtn" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
                             <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
                         </span>
@@ -25,7 +26,10 @@
                     <div class="col-lg-6 col-xl-4">
                         <div class="card mb-5 mb-xl-0">
                             <div class="card-body p-5">
-                                <div class="small text-uppercase fw-bold text-muted">Entrada</div>
+                                <div class="small text-uppercase fw-bold text-muted">
+                                Entrada
+                                </div>
+                                <img id=inputImage></img>
                                </div>
                         </div>
                     </div>
