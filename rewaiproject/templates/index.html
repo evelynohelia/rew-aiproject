@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content1 %}
+<div class="container mt-5">
+<!-- Pricing section-->
+        <section class="bg-light py-5 border-bottom">
+            <div class="container px-5 my-5">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bolder">Fashion Store Sorter</h2>
+                    <div class="mx-5 my-5 py-5 px-5">
+                    <form>
+                        <div class="input-group">
+                        <span class="form-control"></span>
+                        <span class="input-group-btn">
+                            <input name="uploaded_file" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
+                        </span>
+                        </div>
+                    </form>
+                    </div>
+                <div class="row gx-5 justify-content-center">
+                    <!-- Pricing card free-->
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card mb-5 mb-xl-0">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">Entrada</div>
+                               </div>
+                        </div>
+                    </div>
+                    <!-- Pricing card pro-->
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card mb-5 mb-xl-0">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    Salida
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pricing card enterprise
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
+                                <div class="mb-3">
+                                    <span class="display-4 fw-bold">$49</span>
+                                    <span class="text-muted">/ mo.</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        <strong>Unlimited users</strong>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        5GB storage
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Unlimited public projects
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Community access
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Unlimited private projects
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Dedicated support
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        <strong>Unlimited</strong>
+                                        linked domains
+                                    </li>
+                                    <li class="text-muted">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Monthly status reports
+                                    </li>
+                                </ul>
+                                <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </section>
+</div>
+<script type="text/javascript" src="{% static  'js/action.js' %}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+{% endblock %}
