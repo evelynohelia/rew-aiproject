@@ -9,11 +9,12 @@
                 <div class="text-center mb-5">
                     <h2 class="fw-bolder">Fashion Store Sorter</h2>
                     <div class="mx-5 my-5 py-5 px-5">
-                    <form>
+                    <form role="form"  enctype="multipart/form-data" method="POST" id="sorter">
+                    {% csrf_token %}
                         <div class="input-group">
                         <span class="form-control"></span>
                         <span class="input-group-btn">
-                            <input name="uploaded_file" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                            <input name="uploaded_file" id="inputImageBtn" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
                             <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
                         </span>
                         </div>
