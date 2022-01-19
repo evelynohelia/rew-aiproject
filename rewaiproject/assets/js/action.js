@@ -26,7 +26,7 @@ inputImageBtn.onchange = evt => {
           console.log(data); // JSON data parsed by `data.json()` call
           console.log('resultcamisa',data.blusa)
           console.log(inputImage,outImageMaskCamisa,outImageMaskPantalon)
-          outImageMaskCamisa.src = "http://127.0.0.1:8000/static/"+data.blusa
+          outImageMaskCamisa.src = "http://127.0.0.1:8000/static/"+data.blusa          
           outImageMaskPantalon.src = "http://127.0.0.1:8000/static/"+data.pantalon
           outStoreCamisa.innerHTML = data.store_camisa
           outStorePantalon.innerHTML = data.store_pantalon
