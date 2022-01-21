@@ -9,3 +9,4 @@ djangorestframework
 markdown       # Markdown support for the browsable API.
 django-filter
 opencv-python
+whitenoise
